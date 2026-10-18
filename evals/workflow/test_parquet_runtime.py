@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+@unittest.skipUnless(importlib.util.find_spec('pyarrow') is not None, 'pyarrow not installed in structural runner')
 class TestParquetRuntime(unittest.TestCase):
     def test_actual_parquet_roundtrip(self):
         import pyarrow as pa
