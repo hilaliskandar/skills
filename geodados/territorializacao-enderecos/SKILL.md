@@ -1,6 +1,6 @@
 ---
 name: territorializacao-enderecos
-description: Territorializar estabelecimentos e vínculos RAIS/CNEFE por CEP, logradouro, face, quadra e setor com precisão graduada e auditoria de incerteza.
+description: Localizar registros de estabelecimentos por endereço, CEP, face, quadra ou setor com classes de precisão e métricas de vínculos. Usar para correspondência RAIS-CNEFE ou geocodificação aproximada auditável.
 ---
 
 # Territorialização de Endereços
