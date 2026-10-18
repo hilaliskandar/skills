@@ -48,3 +48,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 - Consultar `references/consolidation-policy.md` quando uma base preservar geometria e coordenadas de várias versões.
 - Exigir precedência explícita no manifesto e preservar a linhagem da geometria final; distinguir precisão territorial e confiança da associação.
 - Utilizar somente registros espacialmente aptos para cada método; não usar fallback municipal como ponto local.
+
+## Verificação de consolidações
+- Quando houver manifesto de GeoParquet consolidado, consultar `references/qa-reconciliation.md` e executar `scripts/validate_consolidation_manifest.py`.
+- Exigir distinção entre geometria analítica e ponto exato do estabelecimento. Preservar alertas de QA até confronto com definição e código gerador.
