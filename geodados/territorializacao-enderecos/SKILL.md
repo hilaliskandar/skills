@@ -80,3 +80,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Contrato de predicados e metas
 - Para QA com metas explícitas, descrever cada indicador, seu predicado e o predicado utilizado para definir a meta; executar `scripts/audit_metric_contract.py` sobre o contrato JSON.
 - Rejeitar metas derivadas de população distinta. O teste verifica consistência declarada, não a veracidade dos predicados nem valores calculados.
+
+## Alternativa de execução Colab
+- Se não houver leitor Parquet no ambiente, consultar `references/colab-execution.md` para execução assistida em Google Colab, com entrada explícita e relatórios agregados.
+- O notebook não é automaticamente executável pela skill; exigir autorização e retorno dos resultados ao chat.
