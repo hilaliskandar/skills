@@ -16,3 +16,7 @@ description: Auditar arquivos geoespaciais e junções por CRS, integridade das 
 - Registrar fonte, data de corte, resultados, limitações e pendências.
 - Não inventar dados, normas, citações ou resultados de execução.
 - Distinguir informação verificada, inferência e recomendação.
+
+## Recursos de auditoria
+- Consultar `references/audit-levels.md` para distinguir inspeção determinística de GeoJSON e validação topológica completa.
+- Executar `scripts/audit_geojson.py` quando o arquivo de entrada for GeoJSON; reportar explicitamente suas limitações.
