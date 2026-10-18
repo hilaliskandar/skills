@@ -26,4 +26,6 @@ jobs:
         env:
           DRIVE_FILE_ID: ${{ secrets.DRIVE_FILE_ID }}
           DRIVE_OUTPUT_FOLDER_ID: ${{ secrets.DRIVE_OUTPUT_FOLDER_ID }}
+          EXPECTED_ESTABLISHMENTS: ${{ vars.EXPECTED_ESTABLISHMENTS }}
+          EXPECTED_BONDS: ${{ vars.EXPECTED_BONDS }}
         run: python scripts/drive_qa_runner.py
