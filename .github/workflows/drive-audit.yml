@@ -1,0 +1,29 @@
+name: Drive GeoParquet QA (opt-in)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  audit:
+    if: ${{ vars.ENABLE_DRIVE_AUDIT == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Authenticate by federated identity
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+      - name: Install reader and Google client
+        run: python -m pip install "pyarrow>=16,<25" "google-auth>=2,<3" "requests>=2,<3"
+      - name: Run aggregate audit
+        env:
+          DRIVE_FILE_ID: ${{ secrets.DRIVE_FILE_ID }}
+          DRIVE_OUTPUT_FOLDER_ID: ${{ secrets.DRIVE_OUTPUT_FOLDER_ID }}
+        run: python scripts/drive_qa_runner.py
