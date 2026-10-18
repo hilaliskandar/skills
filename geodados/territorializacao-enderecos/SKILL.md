@@ -76,3 +76,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Correção de inconsistências em QA
 - Consultar `references/qa-classification-repair.md` para corrigir contratos de classificação sem substituir marcadores desconhecidos por falsos.
 - Manter separadas metas de geometria e de ponto efetivo e exigir inspeção da base quando se pretender encerrar a auditoria.
+
+## Contrato de predicados e metas
+- Para QA com metas explícitas, descrever cada indicador, seu predicado e o predicado utilizado para definir a meta; executar `scripts/audit_metric_contract.py` sobre o contrato JSON.
+- Rejeitar metas derivadas de população distinta. O teste verifica consistência declarada, não a veracidade dos predicados nem valores calculados.
