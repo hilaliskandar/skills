@@ -23,3 +23,9 @@ description: Localizar registros de estabelecimentos por endereço, CEP, face, q
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Referências e métricas
+- Consultar `references/matching-policy.md` para categorias de precisão, evidências mínimas e parâmetros versionados.
+- Para resultados tabulares com uma linha por estabelecimento e classe definida, executar `scripts/coverage_report.py entrada.csv saida.json`.
+- Conferir conservação de estabelecimentos e vínculos e distinguir cobertura estrita, aproximada e resíduos. O script é de auditoria de cobertura, **não executa geocodificação**.
+- Não promover resultados ambíguos sem justificativa verificável. Registrar estado de execução e pendências quando houver interrupção.
