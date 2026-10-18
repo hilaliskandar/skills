@@ -44,6 +44,14 @@ def run():
         result={"sha256":sha.hexdigest(),"flag_presente":has_point,"total":sum(counts.values()),
                 "total_vinculos":sum(bonds.values()),"estabelecimentos_por_classe":dict(counts),
                 "vinculos_por_classe":dict(bonds)}
+        expected_n=os.environ.get("EXPECTED_ESTABLISHMENTS")
+        expected_bonds=os.environ.get("EXPECTED_BONDS")
+        if expected_n and result["total"] != int(expected_n):
+            raise ValueError("Establishment conservation check failed")
+        if expected_bonds and result["total_vinculos"] != int(expected_bonds):
+            raise ValueError("Employment conservation check failed")
+        if result["estabelecimentos_por_classe"].get("indeterminado",0):
+            result["alerta_qualidade"]="Existe geometria com status do ponto indeterminado"
         payload=json.dumps(result,ensure_ascii=False,indent=2).encode("utf-8")
         name="qa-agregado-"+os.environ.get("GITHUB_RUN_ID","manual")+".json"
         metadata=json.dumps({"name":name,"parents":[folder],"mimeType":"application/json"}).encode()
