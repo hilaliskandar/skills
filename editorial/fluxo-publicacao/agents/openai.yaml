@@ -1,3 +1,4 @@
 interface:
   display_name: "Fluxo de Publicação"
-  short_description: "Preparar e verificar artigos, chamadas e envios por Emdash, e-mail e LinkedIn com rastreab"
+  short_description: "Preparar publicações e conferir autorização e entrega"
+  default_prompt: "Use $fluxo-publicacao para realizar esta tarefa conforme o procedimento da skill."
