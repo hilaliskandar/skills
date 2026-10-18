@@ -22,3 +22,7 @@ description: Interpretar e comparar artigos específicos de leis urbanísticas, 
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Referências condicionais
+- Para comprovação e classificação de dispositivos legais, consultar `references/normative-evidence-schema.md`.
+- Para comparações entre normas, utilizar `references/comparison-schema.md`.
