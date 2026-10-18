@@ -1,6 +1,6 @@
 ---
 name: auditoria-geoespacial
-description: Auditar GeoJSON, shapefiles, GeoPackages e tabelas espaciais, verificando CRS, geometrias, cobertura, unicidade e integridade de junções.
+description: Auditar arquivos geoespaciais e junções por CRS, integridade das geometrias, unicidade das chaves e cardinalidade. Usar para controle de qualidade de GeoPackage, GeoJSON, shapefile ou tabelas espaciais.
 ---
 
 # Auditoria Geoespacial
