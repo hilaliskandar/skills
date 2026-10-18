@@ -23,3 +23,8 @@ description: Fichar criticamente texto científico com protocolo FAFAT+, identif
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Recursos condicionais
+- Para ficha completa, consultar `references/fafat-schema.md` antes de produzir o resultado.
+- Para conflitos de versões, integridade de trechos e citações, consultar `references/evidence-policy.md`.
+- O esquema é experimental e não substitui sem conferência eventual protocolo FAFAT+ integral.
