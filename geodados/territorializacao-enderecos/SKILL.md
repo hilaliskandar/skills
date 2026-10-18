@@ -34,3 +34,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 - Consultar `references/rais-cnefe-classes.md` ao interpretar resultados AQ0–AQ4; verificar os notebooks e a versão das regras originais.
 - Se a entrada contiver apenas a classificação histórica AQ0–AQ4, executar `scripts/normalize_historical_classes.py` para conversão conservadora antes de `scripts/coverage_report.py`.
 - Para códigos R89–R93, exigir classe final documentada: não deduzir precisão a partir de uma etapa de refinamento.
+
+## Controle de transições entre versões
+- Em comparações com universo estável, consultar `references/transition-audit.md` e executar `scripts/audit_transitions.py` para verificar conservação de IDs e vínculos.
+- Tratar mudança de classe como hipótese de promoção, não como prova de maior precisão; exigir evidências e regras da execução.
