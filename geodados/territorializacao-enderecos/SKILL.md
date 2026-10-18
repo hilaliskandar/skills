@@ -84,3 +84,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Alternativa de execução Colab
 - Se não houver leitor Parquet no ambiente, consultar `references/colab-execution.md` para execução assistida em Google Colab, com entrada explícita e relatórios agregados.
 - O notebook não é automaticamente executável pela skill; exigir autorização e retorno dos resultados ao chat.
+
+## Execução automatizada em GitHub Actions
+- Consultar `references/github-actions-executor.md` para teste Parquet com dados sintéticos e execução pelo GitHub Actions.
+- A integração inicial prova apenas a leitura no executor; não autoriza acesso automático a dados privados no Drive nem o despacho de workflows pelo ChatGPT.
