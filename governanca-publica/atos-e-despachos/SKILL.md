@@ -1,6 +1,6 @@
 ---
 name: atos-e-despachos
-description: Produzir ou revisar despachos, notas técnicas, minutas de decreto e manifestações administrativas com linguagem oficial, motivação e competência.
+description: Elaborar ou revisar minutas de despachos, notas técnicas e atos administrativos com motivação, competência e linguagem oficial. Usar para produção de manifestação administrativa, sem assumir assinatura ou decisão da autoridade.
 ---
 
 # Atos e Despachos
