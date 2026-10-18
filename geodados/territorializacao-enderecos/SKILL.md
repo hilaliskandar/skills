@@ -43,3 +43,8 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 - Consultar `references/promotion-evidence.md` para auditar ganhos de precisão entre versões.
 - Executar `scripts/check_promotion_evidence.py` quando houver tabela de transições com método, versão da regra e localizador de evidência.
 - Não tomar a presença de campos como comprovação da exatidão do match; confrontar com as fontes e geometria.
+
+## Consolidação de rodadas incrementais
+- Consultar `references/consolidation-policy.md` quando uma base preservar geometria e coordenadas de várias versões.
+- Exigir precedência explícita no manifesto e preservar a linhagem da geometria final; distinguir precisão territorial e confiança da associação.
+- Utilizar somente registros espacialmente aptos para cada método; não usar fallback municipal como ponto local.
