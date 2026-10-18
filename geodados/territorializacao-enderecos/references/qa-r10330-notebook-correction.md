@@ -23,3 +23,7 @@ add('marcador_ponto_ausente', int((com_geom & coord_bool.isna()).sum()))
 ```
 
 Não atribuir `esperado=0` aos pontos confirmados apenas por terem retornado zero: trata-se de constatação, não de meta de qualidade. A célula 4 utiliza `fillna(False)` e colapsa ausências em negativas para `qualidade_geometria_final`. Recomenda-se avaliar separadamente as ausências em `coord_raw` antes de decidir se a classe `REFERENCIA_TERRITORIAL_LOCAL` é suficientemente respaldada. Não atualizar o GeoParquet nem substituir o QA histórico; gerar um novo QA versionado e manter a proveniência.
+
+## Implementação complementar
+
+Notebook QA v2 somente leitura, salvo no Google Drive: https://drive.google.com/file/d/1EQFvqA8Iw5EK2VEGRRucBO8zDsMIKqTN/view . Ele lê o GeoParquet canônico, verifica SHA-256, calcula indicadores independentes de cobertura geométrica e ponto confirmado, produz CSV e JSON agregados e **não publica arquivos no Drive por padrão**. Não substitui o notebook gerador nem reexecuta a consolidação geográfica. O notebook foi validado sintaticamente, mas ainda não foi executado no Colab.
