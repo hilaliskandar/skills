@@ -1,0 +1,3 @@
+interface:
+  display_name: "Auditoria Geoespacial"
+  short_description: "Auditar GeoJSON, shapefiles, GeoPackages e tabelas espaciais, verificando CRS, geometrias,"
