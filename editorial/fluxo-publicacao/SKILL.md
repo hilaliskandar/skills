@@ -1,6 +1,6 @@
 ---
 name: fluxo-publicacao
-description: Preparar e verificar artigos, chamadas e envios por Emdash, e-mail e LinkedIn com rastreabilidade e controle de execução.
+description: Preparar materiais editoriais, chamadas e verificar agendamento ou publicação em canais digitais. Usar para planejar entrega e conferir evidências remotas; não interpretar uma coleta de radar como publicação concluída.
 ---
 
 # Fluxo de Publicação
