@@ -1,3 +1,4 @@
 interface:
-  display_name: "Indicadores de Priorização"
-  short_description: "Construir índices auditáveis de prioridade municipal com normalização, pesos, direção dos indicadore"
+  display_name: "Índices de Priorização"
+  short_description: "Calcular e avaliar índices de prioridade municipal"
+  default_prompt: "Use $indicadores-priorizacao para realizar esta tarefa conforme o procedimento da skill."
