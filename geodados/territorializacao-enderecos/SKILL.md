@@ -60,3 +60,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Coerência dos indicadores de posição
 - Consultar `references/qa-predicate-consistency.md` ao comparar quantidade de geometrias com quantidade de pontos efetivos de estabelecimento.
 - Separar valores verdadeiros, falsos e desconhecidos dos marcadores; não converter ausência de evidência em negação sem aviso.
+
+## Auditoria de indicadores de ponto
+- Em tabelas com `tem_geometria` e `coordenada_eh_estabelecimento`, executar `scripts/audit_position_flags.py` para apurar ponto confirmado, referência não predial e natureza indeterminada sem coerção booleana implícita.
+- Validar a definição e os valores esperados de cada indicador no notebook original antes de declarar o QA aprovado.
