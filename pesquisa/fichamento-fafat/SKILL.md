@@ -1,6 +1,6 @@
 ---
 name: fichamento-fafat
-description: Realizar fichamento acadêmico crítico de artigos, capítulos, relatórios e preprints com análise de hipóteses, métodos, inferências, força da prova e contribuições.
+description: Fichar criticamente texto científico com protocolo FAFAT+, identificando versão, problema, hipóteses, método, evidências e força inferencial. Usar para artigos, capítulos, teses, relatórios e preprints.
 ---
 
 # Fichamento FAFAT+
