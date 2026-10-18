@@ -38,3 +38,8 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Controle de transições entre versões
 - Em comparações com universo estável, consultar `references/transition-audit.md` e executar `scripts/audit_transitions.py` para verificar conservação de IDs e vínculos.
 - Tratar mudança de classe como hipótese de promoção, não como prova de maior precisão; exigir evidências e regras da execução.
+
+## Evidência das promoções
+- Consultar `references/promotion-evidence.md` para auditar ganhos de precisão entre versões.
+- Executar `scripts/check_promotion_evidence.py` quando houver tabela de transições com método, versão da regra e localizador de evidência.
+- Não tomar a presença de campos como comprovação da exatidão do match; confrontar com as fontes e geometria.
