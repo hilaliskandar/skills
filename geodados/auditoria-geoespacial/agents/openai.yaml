@@ -1,3 +1,4 @@
 interface:
   display_name: "Auditoria Geoespacial"
-  short_description: "Auditar GeoJSON, shapefiles, GeoPackages e tabelas espaciais, verificando CRS, geometrias,"
+  short_description: "Auditar CRS, geometria e junções de bases espaciais"
+  default_prompt: "Use $auditoria-geoespacial para realizar esta tarefa conforme o procedimento da skill."
