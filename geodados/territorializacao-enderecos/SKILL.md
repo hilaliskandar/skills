@@ -56,3 +56,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Controle semântico de indicadores QA
 - Consultar `references/qa-semantic-gate.md` e executar `scripts/audit_qa_csv.py` quando houver indicadores com valores observados, esperados e status.
 - Não transformar `ALERTA` em aprovação por equiparar posições analíticas a pontos prediais; investigar fórmula, filtro e versão do notebook gerador.
+
+## Coerência dos indicadores de posição
+- Consultar `references/qa-predicate-consistency.md` ao comparar quantidade de geometrias com quantidade de pontos efetivos de estabelecimento.
+- Separar valores verdadeiros, falsos e desconhecidos dos marcadores; não converter ausência de evidência em negação sem aviso.
