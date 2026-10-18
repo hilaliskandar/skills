@@ -22,3 +22,7 @@ description: Inventariar legislação urbanística municipal, identificando plan
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Recursos condicionais
+- Para estruturar registros legislativos, consultar `references/inventory-schema.md`.
+- Para trabalho prolongado ou retomada entre conversas, consultar `references/run-manifest.md` e gravar o estado da tarefa fora da skill.
