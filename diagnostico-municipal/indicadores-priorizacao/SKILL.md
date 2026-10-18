@@ -22,3 +22,8 @@ description: Construir e auditar índice composto ou ranking de prioridade munic
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Cálculo determinístico
+- Antes do cálculo, consultar `references/index-method.md` e justificar escolha das variáveis e pesos.
+- Para CSVs compatíveis e configuração JSON explícita, executar `scripts/compute_index.py entrada.csv config.json saida.json`.
+- Conferir `excluded_ids`, indicadores constantes e sensibilidade; não presumir causalidade.
