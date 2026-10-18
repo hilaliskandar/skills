@@ -52,3 +52,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Verificação de consolidações
 - Quando houver manifesto de GeoParquet consolidado, consultar `references/qa-reconciliation.md` e executar `scripts/validate_consolidation_manifest.py`.
 - Exigir distinção entre geometria analítica e ponto exato do estabelecimento. Preservar alertas de QA até confronto com definição e código gerador.
+
+## Controle semântico de indicadores QA
+- Consultar `references/qa-semantic-gate.md` e executar `scripts/audit_qa_csv.py` quando houver indicadores com valores observados, esperados e status.
+- Não transformar `ALERTA` em aprovação por equiparar posições analíticas a pontos prediais; investigar fórmula, filtro e versão do notebook gerador.
