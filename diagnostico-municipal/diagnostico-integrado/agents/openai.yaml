@@ -1,3 +1,4 @@
 interface:
-  display_name: "Diagnóstico Municipal Integrado"
-  short_description: "Elaborar diagnósticos municipais reproduzíveis com fontes oficiais IBGE, Censo, FINBRA, CadÚnico, se"
+  display_name: "Diagnóstico Municipal"
+  short_description: "Produzir diagnósticos municipais com dados oficiais"
+  default_prompt: "Use $diagnostico-integrado para realizar esta tarefa conforme o procedimento da skill."
