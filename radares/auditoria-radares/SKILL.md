@@ -1,6 +1,6 @@
 ---
 name: auditoria-radares
-description: Auditar edições dos radares normativo, imobiliário e de contratações, verificando fontes, deduplicação, Emdash, e-mail, LinkedIn e cronograma.
+description: Auditar itens, fontes, deduplicação e situação real de edições dos radares normativo, imobiliário e de contratações. Usar para verificar coleta, consolidação, envio e publicação, com prova de cada estado.
 ---
 
 # Auditoria dos Radares
