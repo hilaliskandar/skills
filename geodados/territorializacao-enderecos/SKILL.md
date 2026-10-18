@@ -72,3 +72,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Inspeção independente do GeoParquet
 - Quando o arquivo estiver acessível em ambiente com `pyarrow`, executar `scripts/inspect_parquet_flag.py entrada.geoparquet resumo.json` e distinguir flag ausente, verdadeira, falsa, nula ou inválida.
 - Preservar a base original e não presumir ponto predial a partir de uma geometria analítica.
+
+## Correção de inconsistências em QA
+- Consultar `references/qa-classification-repair.md` para corrigir contratos de classificação sem substituir marcadores desconhecidos por falsos.
+- Manter separadas metas de geometria e de ponto efetivo e exigir inspeção da base quando se pretender encerrar a auditoria.
