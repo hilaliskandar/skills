@@ -1,0 +1,3 @@
+interface:
+  display_name: "Territorialização de Endereços"
+  short_description: "Atribuir estabelecimentos RAIS/CNEFE a endereço, face, quadra, conjunto de quadras ou seto"
