@@ -68,3 +68,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Contrato de QA
 - Consultar `references/qa-expected-values.md` para definir denominadores, predicados e valores esperados comparáveis.
 - Distinguir geometria analítica, referência territorial local e ponto efetivo de estabelecimento antes de declarar o estado do QA.
+
+## Inspeção independente do GeoParquet
+- Quando o arquivo estiver acessível em ambiente com `pyarrow`, executar `scripts/inspect_parquet_flag.py entrada.geoparquet resumo.json` e distinguir flag ausente, verdadeira, falsa, nula ou inválida.
+- Preservar a base original e não presumir ponto predial a partir de uma geometria analítica.
