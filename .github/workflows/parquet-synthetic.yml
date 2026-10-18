@@ -24,5 +24,7 @@ jobs:
           python-version: "3.12"
       - name: Install Parquet reader
         run: python -m pip install "pyarrow>=16,<25"
+      - name: Verify Drive executor syntax without credentials
+        run: python -m py_compile scripts/drive_qa_runner.py
       - name: Execute synthetic Parquet roundtrip
         run: python -m unittest discover -s evals/workflow -p 'test_parquet_runtime.py' -v
