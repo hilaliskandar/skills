@@ -1,3 +1,4 @@
 interface:
   display_name: "Inventário Normativo"
-  short_description: "Inventariar e auditar planos diretores, leis de uso e ocupação do solo e códigos de obras. Usar em p"
+  short_description: "Inventariar normas municipais com fontes oficiais"
+  default_prompt: "Use $inventario-normativo para realizar esta tarefa conforme o procedimento da skill."
