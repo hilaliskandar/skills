@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from unittest import TestCase, main, mock
 
-@__import__('unittest').skipUnless(importlib.util.find_spec('pyarrow') and importlib.util.find_spec('google.auth'), 'Drive dependencies absent')
+@__import__('unittest').skipUnless(importlib.util.find_spec('pyarrow') and importlib.util.find_spec('google'), 'Drive dependencies absent')
 @mock.patch.dict(os.environ, {"DRIVE_FILE_ID":"synthetic-id","DRIVE_OUTPUT_FOLDER_ID":"synthetic-folder","EXPECTED_ESTABLISHMENTS":"4","EXPECTED_BONDS":"65","GITHUB_RUN_ID":"123"})
 class TestDriveRunner(TestCase):
     def test_mock_drive_roundtrip(self):
