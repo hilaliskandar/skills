@@ -1,6 +1,6 @@
 ---
 name: contratacoes-publicas
-description: Revisar ETP, DFD, termos de referência, matrizes de riscos e planos de trabalho em contratações públicas sob a Lei 14.133/2021.
+description: Examinar ETP, DFD, termo de referência, pesquisa de preços, riscos e entregas de contratação pública. Usar para análise técnica de processos sob a Lei 14.133/2021, com fontes normativas atuais verificadas.
 ---
 
 # Contratações Públicas
