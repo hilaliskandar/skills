@@ -64,3 +64,7 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 ## Auditoria de indicadores de ponto
 - Em tabelas com `tem_geometria` e `coordenada_eh_estabelecimento`, executar `scripts/audit_position_flags.py` para apurar ponto confirmado, referência não predial e natureza indeterminada sem coerção booleana implícita.
 - Validar a definição e os valores esperados de cada indicador no notebook original antes de declarar o QA aprovado.
+
+## Contrato de QA
+- Consultar `references/qa-expected-values.md` para definir denominadores, predicados e valores esperados comparáveis.
+- Distinguir geometria analítica, referência territorial local e ponto efetivo de estabelecimento antes de declarar o estado do QA.
