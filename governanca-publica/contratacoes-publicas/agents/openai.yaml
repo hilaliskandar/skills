@@ -1,3 +1,4 @@
 interface:
   display_name: "Contratações Públicas"
-  short_description: "Revisar ETP, DFD, termos de referência, matrizes de riscos e planos de trabalho em contratações públ"
+  short_description: "Revisar ETP, TR, riscos e evidências de contratação"
+  default_prompt: "Use $contratacoes-publicas para realizar esta tarefa conforme o procedimento da skill."
