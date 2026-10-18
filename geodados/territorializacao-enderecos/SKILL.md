@@ -29,3 +29,8 @@ Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas
 - Para resultados tabulares com uma linha por estabelecimento e classe definida, executar `scripts/coverage_report.py entrada.csv saida.json`.
 - Conferir conservação de estabelecimentos e vínculos e distinguir cobertura estrita, aproximada e resíduos. O script é de auditoria de cobertura, **não executa geocodificação**.
 - Não promover resultados ambíguos sem justificativa verificável. Registrar estado de execução e pendências quando houver interrupção.
+
+## Compatibilidade histórica RAIS/CNEFE
+- Consultar `references/rais-cnefe-classes.md` ao interpretar resultados AQ0–AQ4; verificar os notebooks e a versão das regras originais.
+- Se a entrada contiver apenas a classificação histórica AQ0–AQ4, executar `scripts/normalize_historical_classes.py` para conversão conservadora antes de `scripts/coverage_report.py`.
+- Para códigos R89–R93, exigir classe final documentada: não deduzir precisão a partir de uma etapa de refinamento.
