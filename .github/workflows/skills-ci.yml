@@ -14,3 +14,6 @@ jobs:
           python-version: "3.12"
       - name: Validate repository structure
         run: python scripts/validate_repo.py
+
+      - name: Run deterministic and recovery fixtures
+        run: python -m unittest discover -s evals -p 'test_*.py' -v
