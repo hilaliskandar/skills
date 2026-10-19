@@ -7,10 +7,6 @@ on:
         required: true
         default: openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
         type: string
-  push:
-    paths:
-      - 'evals/activation/router_proxy_batches.py'
-      - '.github/workflows/activation-proxy-batch.yml'
 permissions:
   contents: read
 jobs:
