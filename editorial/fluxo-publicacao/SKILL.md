@@ -1,6 +1,6 @@
 ---
 name: fluxo-publicacao
-description: Preparar materiais editoriais, chamadas e verificar agendamento ou publicação em canais digitais. Usar para planejar entrega e conferir evidências remotas; não interpretar uma coleta de radar como publicação concluída.
+description: Preparar ou executar fluxo editorial de textos, chamadas, agendamentos e publicação em canais digitais. Usar quando o pedido principal é criar, revisar, agendar ou publicar conteúdo. Para auditar retrospectivamente se uma edição de radar realmente foi publicada no Emdash, enviada ou divulgada no LinkedIn, usar auditoria-radares.
 ---
 
 # Fluxo de Publicação
