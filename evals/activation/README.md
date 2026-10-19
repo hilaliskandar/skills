@@ -27,3 +27,5 @@ O executor `evals/activation/router_proxy_batches.py` classificou as solicitaç�
 - Limitação essencial: **teste indireto de classificação textual**, não um registro de acionamento nativo no ambiente ChatGPT. **Não** preencher `execution-results.csv` como `PASS` com base nesta evidência. A homologação nativa continua pendente.
 
 O workflow público `.github/workflows/activation-proxy-batch.yml` é **manual** (`workflow_dispatch`), para não iniciar chamadas a provedores por qualquer push nem produzir reprovações automáticas por falta de segredo. Requer `OPENROUTER_API_KEY` se executado diretamente no GitHub hospedado. O workflow do executor privado utiliza o gateway LiteLLM local e sua credencial virtual `ALE20_LITELLM_API_KEY`. Nenhuma credencial deve constar nos arquivos ou relatórios.
+
+Para a homologação nativa por cenário e o registro de evidências, seguir [HOMOLOGACAO-NATIVA.md](HOMOLOGACAO-NATIVA.md).
