@@ -48,7 +48,7 @@ def probe(case, catalog):
         routed_model = ("openai/" + MODEL) if API_BASE else MODEL
         options = {"api_base": API_BASE.rstrip("/") + "/v1"} if API_BASE else {}
         response = completion(model=routed_model, messages=[{"role":"user","content":prompt}],
-                              api_key=API_KEY, max_tokens=80, temperature=0, **options)
+                              api_key=API_KEY, max_tokens=192, temperature=0, **options)
         chosen = (response.choices[0].message.content or "").strip()
     elif BACKEND == "responses":
         chosen = query_responses(prompt)
