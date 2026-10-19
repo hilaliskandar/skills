@@ -34,5 +34,22 @@ class TestActivationReport(unittest.TestCase):
             module.evaluate([{"case_id":"a", "status":"PASS"},
                              {"case_id":"a", "status":"PASS"}])
 
+    def test_release_evidence_rejects_missing_metadata(self):
+        rows=[{"case_id":"x","status":"PASS","actual_skill":"sample","evidence":"",
+               "model":"GPT","library_commit":"abc"}]
+        self.assertTrue(module.check_release_evidence(rows,{"x":"sample"}))
+    def test_release_evidence_rejects_skill_mismatch(self):
+        rows=[{"case_id":"x","status":"PASS","actual_skill":"other","evidence":"log",
+               "model":"GPT","library_commit":"abc"}]
+        self.assertTrue(module.check_release_evidence(rows,{"x":"sample"}))
+    def test_release_evidence_rejects_partial_inventory(self):
+        with self.assertRaises(ValueError):
+            module.check_release_evidence([{"case_id":"x","status":"PASS"}],
+                                          {"x":"sample","y":"other"})
+    def test_release_evidence_accepts_complete_documented_case(self):
+        rows=[{"case_id":"x","status":"PASS","actual_skill":"sample","evidence":"log",
+               "model":"GPT","library_commit":"abc"}]
+        self.assertEqual(module.check_release_evidence(rows,{"x":"sample"}),[])
+
 if __name__ == "__main__":
     unittest.main()
