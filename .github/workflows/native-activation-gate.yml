@@ -1,0 +1,20 @@
+name: Native Skill activation release gate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-release-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate recorded native activation cases
+        run: python evals/activation/report.py
+      - name: Clarify evidence limitations
+        if: always()
+        run: |
+          echo "The report checks coverage and evidence metadata only." >> "$GITHUB_STEP_SUMMARY"
+          echo "A reviewer must independently verify that evidence demonstrates native ChatGPT Skill activation." >> "$GITHUB_STEP_SUMMARY"
