@@ -57,7 +57,7 @@ def probe(case, catalog):
         raise ValueError("Unknown backend")
     forbidden = case.get("forbidden_skill", "")
     exact = chosen in catalog
-    mentions = [name for name in catalog if re.search(r"(?<![\\w-])" + re.escape(name) + r"(?![\\w-])", chosen)]
+    mentions = [name for name in catalog if re.search(r"(?<![\w-])" + re.escape(name) + r"(?![\w-])", chosen)]
     normalized = chosen if exact else (mentions[0] if len(mentions) == 1 else "")
     return {"id": case["id"], "expected": case["expected_skill"], "selected": normalized,
             "diagnostic_response": chosen[:450] if CASE_ID and not exact else "",
