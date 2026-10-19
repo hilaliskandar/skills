@@ -39,17 +39,16 @@ def descriptions():
 
 def probe(case, catalog):
     names = sorted(catalog)
-    prompt = ("Choose the ONE most appropriate Skill for the user request. "
-              "Return only the skill name from the catalog, without explanation. "
-              "Do not execute the request.\n\nSkill catalog:\n"
+    prompt = ("Classification task: reply with exactly one catalog identifier. "
+              "Never enumerate the catalog or explain.\n\n"
               + "\n".join(f"{k}: {catalog[k]}" for k in names)
-              + "\n\nUser request:\n" + case["prompt"])
+              + "\n\nREQUEST: " + case["prompt"] + "\nLABEL:")
     if BACKEND == "litellm":
         from litellm import completion
         routed_model = ("openai/" + MODEL) if API_BASE else MODEL
         options = {"api_base": API_BASE.rstrip("/") + "/v1"} if API_BASE else {}
         response = completion(model=routed_model, messages=[{"role":"system","content":"You are a strict Skill selector. Output exactly one valid skill name, with no reasoning, enumeration, punctuation or other text."},{"role":"user","content":prompt}],
-                              api_key=API_KEY, max_tokens=192, temperature=0, **options)
+                              api_key=API_KEY, max_tokens=48, temperature=0, **options)
         chosen = (response.choices[0].message.content or "").strip()
     elif BACKEND == "responses":
         chosen = query_responses(prompt)
