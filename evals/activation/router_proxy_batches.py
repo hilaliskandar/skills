@@ -18,6 +18,7 @@ BACKEND = os.environ.get("ROUTER_TEST_BACKEND", "responses")
 API_BASE = os.environ.get("ROUTER_TEST_API_BASE", "")
 BATCH_SIZE = max(1, min(int(os.environ.get("ROUTER_TEST_BATCH_SIZE", "13")), 25))
 SMOKE_ONLY = os.environ.get("ROUTER_TEST_SMOKE_ONLY", "") == "true"
+CASE_ID = os.environ.get("ROUTER_TEST_CASE_ID", "")
 
 
 def read_csv(path):
@@ -59,6 +60,7 @@ def probe(case, catalog):
     mentions = [name for name in catalog if re.search(r"(?<![\\w-])" + re.escape(name) + r"(?![\\w-])", chosen)]
     normalized = chosen if exact else (mentions[0] if len(mentions) == 1 else "")
     return {"id": case["id"], "expected": case["expected_skill"], "selected": normalized,
+            "diagnostic_response": chosen[:450] if CASE_ID and not exact else "",
             "format_exact": exact, "candidate_count": len(mentions),
             "forbidden": forbidden,
             "outcome": "PASS" if normalized == case["expected_skill"] and normalized != forbidden else "FAIL"}
@@ -97,7 +99,11 @@ def main():
     cases = read_csv(CASES / "conflitos.csv") + read_csv(CASES / "conflitos_negative.csv")
     if len(cases) != 25 or set(c["expected_skill"] for c in cases) != set(catalog):
         raise ValueError("The 25-case fixture or the 13-skill catalog is inconsistent")
-    if SMOKE_ONLY:
+    if CASE_ID:
+        cases = [case for case in cases if case["id"] == CASE_ID]
+        if len(cases) != 1:
+            raise ValueError("Invalid targeted case id")
+    elif SMOKE_ONLY:
         cases = cases[:1]
     results = []
     for start in range(0, len(cases), BATCH_SIZE):
