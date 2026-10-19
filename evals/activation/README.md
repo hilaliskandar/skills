@@ -9,3 +9,7 @@ O arquivo conflitos.csv contém expectativas de escolha, e não resultados compr
 ## Execução da avaliação comportamental
 
 Para cada prompt, iniciar conversa independente; registrar data, configuração/modelo disponível, versão/commit da biblioteca, skill acionada, evidência observável e eventual skill indevida. Marcar `PASS` somente quando a skill esperada tiver sido efetivamente acionada e a proibida não; marcar `FAIL` em troca e `UNOBSERVABLE` se o ambiente não permitir observar a seleção. Reportar acertos, falhas e casos não observáveis separadamente. Não concluir eficácia de acionamento apenas porque a CI passou.
+
+## Relatório e critério de liberação
+
+Executar `python evals/activation/report.py --allow-incomplete` para visualizar contagens de aprovações, falhas, pendências e resultados não observáveis sem bloquear a consulta. Executar **sem** `--allow-incomplete` para exigir aprovação de **todos** os cenários registrados: o comando retorna código de erro enquanto houver `NOT_RUN`, `FAIL` ou `UNOBSERVABLE`. O campo `observed_accuracy` usa apenas casos realmente observados e pode ser nulo; jamais interpretá-lo como taxa global quando houver pendências. A CI verifica o programa e os fixtures, mas não executa sessões do modelo, portanto não deve aplicar o bloqueio comportamental como pré-requisito dos testes estruturais.
