@@ -24,4 +24,16 @@ class TestIndex(unittest.TestCase):
         cfg={"id_column":"id","indicators":{"x":{"weight":0,"direction":"higher_is_priority"}}}
         with self.assertRaises(ValueError): module.compute([{"id":"A","x":"1"}],cfg)
 
+    def test_reject_duplicate_ids(self):
+        cfg={"id_column":"id","indicators":{"x":{"weight":1,"direction":"higher_is_priority"}}}
+        with self.assertRaisesRegex(ValueError,"duplicado"):
+            module.compute([{"id":"A","x":"1"},{"id":"A","x":"2"}],cfg)
+    def test_reject_blank_ids(self):
+        cfg={"id_column":"id","indicators":{"x":{"weight":1,"direction":"higher_is_priority"}}}
+        with self.assertRaisesRegex(ValueError,"ausente"):
+            module.compute([{"id":" ","x":"1"}],cfg)
+    def test_preserve_leading_zero_ids(self):
+        cfg={"id_column":"id","indicators":{"x":{"weight":1,"direction":"higher_is_priority"}}}
+        self.assertEqual(module.compute([{"id":"001","x":"1"},{"id":"002","x":"2"}],cfg)["results"][0]["id"],"002")
+
 if __name__=="__main__":unittest.main()
