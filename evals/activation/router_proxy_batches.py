@@ -16,6 +16,7 @@ API_KEY = os.environ.get("ROUTER_TEST_API_KEY", "") or os.environ.get("OPENAI_AP
 BACKEND = os.environ.get("ROUTER_TEST_BACKEND", "responses")
 API_BASE = os.environ.get("ROUTER_TEST_API_BASE", "")
 BATCH_SIZE = max(1, min(int(os.environ.get("ROUTER_TEST_BATCH_SIZE", "13")), 25))
+SMOKE_ONLY = os.environ.get("ROUTER_TEST_SMOKE_ONLY", "") == "true"
 
 
 def read_csv(path):
@@ -80,6 +81,8 @@ def main():
     cases = read_csv(CASES / "conflitos.csv") + read_csv(CASES / "conflitos_negative.csv")
     if len(cases) != 25 or set(c["expected_skill"] for c in cases) != set(catalog):
         raise ValueError("The 25-case fixture or the 13-skill catalog is inconsistent")
+    if SMOKE_ONLY:
+        cases = cases[:1]
     results = []
     for start in range(0, len(cases), BATCH_SIZE):
         batch = cases[start:start+BATCH_SIZE]
@@ -94,7 +97,7 @@ def main():
                                     "outcome":"ERROR","error_type":type(err).__name__})
         counts = {status:sum(x["outcome"] == status for x in results)
                   for status in ("PASS", "FAIL", "ERROR")}
-        print(f"ROUTER_PROXY_BATCH {start//BATCH_SIZE + 1}: completed {len(results)}/25; {counts}")
+        print(f"ROUTER_PROXY_BATCH {start//BATCH_SIZE + 1}: completed {len(results)}/{len(cases)}; {counts}")
     results.sort(key=lambda row:row["id"])
     summary = {"method":"external_model_choice_proxy_not_native_skill_activation",
                "backend":BACKEND,"model":MODEL,"cases":len(results),"passed":sum(r["outcome"]=="PASS" for r in results),
