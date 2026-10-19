@@ -12,7 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 CASES = ROOT / "evals" / "activation"
 MODEL = os.environ.get("ROUTER_TEST_MODEL", "gpt-4.1-mini")
-API_KEY = os.environ.get("OPENAI_API_KEY", "")
+API_KEY = os.environ.get("ROUTER_TEST_API_KEY", "") or os.environ.get("OPENAI_API_KEY", "")
+BACKEND = os.environ.get("ROUTER_TEST_BACKEND", "responses")
 BATCH_SIZE = max(1, min(int(os.environ.get("ROUTER_TEST_BATCH_SIZE", "13")), 25))
 
 
@@ -39,6 +40,22 @@ def probe(case, catalog):
               "Do not execute the request.\n\nSkill catalog:\n"
               + "\n".join(f"{k}: {catalog[k]}" for k in names)
               + "\n\nUser request:\n" + case["prompt"])
+    if BACKEND == "litellm":
+        from litellm import completion
+        response = completion(model=MODEL, messages=[{"role":"user","content":prompt}],
+                              api_key=API_KEY, max_tokens=80, temperature=0)
+        chosen = (response.choices[0].message.content or "").strip()
+    elif BACKEND == "responses":
+        chosen = query_responses(prompt)
+    else:
+        raise ValueError("Unknown backend")
+    forbidden = case.get("forbidden_skill", "")
+    return {"id": case["id"], "expected": case["expected_skill"], "selected": chosen,
+            "forbidden": forbidden,
+            "outcome": "PASS" if chosen == case["expected_skill"] and chosen != forbidden else "FAIL"}
+
+
+def query_responses(prompt):
     data = json.dumps({"model": MODEL, "input": prompt, "max_output_tokens": 40}).encode()
     req = urllib.request.Request(
         "https://api.openai.com/v1/responses",
@@ -49,16 +66,12 @@ def probe(case, catalog):
         payload = json.load(response)
     texts = [part.get("text", "") for item in payload.get("output", [])
              for part in item.get("content", []) if part.get("type") == "output_text"]
-    chosen = " ".join(texts).strip()
-    forbidden = case.get("forbidden_skill", "")
-    return {"id": case["id"], "expected": case["expected_skill"], "selected": chosen,
-            "forbidden": forbidden,
-            "outcome": "PASS" if chosen == case["expected_skill"] and chosen != forbidden else "FAIL"}
+    return " ".join(texts).strip()
 
 
 def main():
     if not API_KEY:
-        print("ROUTER_PROXY_NOT_RUN: OPENAI_API_KEY absent; no behavioral results.")
+        print("ROUTER_PROXY_NOT_RUN: backend credential absent; no behavioral results.")
         return 2
     catalog = descriptions()
     cases = read_csv(CASES / "conflitos.csv") + read_csv(CASES / "conflitos_negative.csv")
@@ -81,7 +94,7 @@ def main():
         print(f"ROUTER_PROXY_BATCH {start//BATCH_SIZE + 1}: completed {len(results)}/25; {counts}")
     results.sort(key=lambda row:row["id"])
     summary = {"method":"external_model_choice_proxy_not_native_skill_activation",
-               "model":MODEL,"cases":len(results),"passed":sum(r["outcome"]=="PASS" for r in results),
+               "backend":BACKEND,"model":MODEL,"cases":len(results),"passed":sum(r["outcome"]=="PASS" for r in results),
                "failed":sum(r["outcome"]=="FAIL" for r in results),
                "errors":sum(r["outcome"]=="ERROR" for r in results)}
     print("ROUTER_PROXY_SUMMARY " + json.dumps(summary, ensure_ascii=False))
