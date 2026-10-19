@@ -27,3 +27,7 @@ Não atribuir `esperado=0` aos pontos confirmados apenas por terem retornado zer
 ## Implementação complementar
 
 Notebook QA v2 somente leitura, salvo no Google Drive: https://drive.google.com/file/d/1EQFvqA8Iw5EK2VEGRRucBO8zDsMIKqTN/view . Ele lê o GeoParquet canônico, verifica SHA-256, calcula indicadores independentes de cobertura geométrica e ponto confirmado, produz CSV e JSON agregados e **não publica arquivos no Drive por padrão**. Não substitui o notebook gerador nem reexecuta a consolidação geográfica. O notebook foi validado sintaticamente, mas ainda não foi executado no Colab.
+
+## Encerramento da linhagem do marcador
+
+A origem da atribuição uniforme foi **localizada na célula de código 10 do notebook R87** `87_TERRITORIALIZACAO_CEP_CNEFE_EMPREGADORES_MAIS10_2025_v1.ipynb` (Drive ID `1JZYV52BdJPp5TKODXk8BQVZGIWiQG12x`): `pareado['coordenada_eh_estabelecimento']=False`. Na mesma etapa, a referência espacial é construída por município+CEP usando o CNEFE, e a geometria é descrita como referência CNEFE do CEP. Portanto, a negativa uniforme é cautela metodológica inicial; **não constitui verificação negativa individual de precisão predial**. Checkpoints de R99 a R103.30 foram auditados e apresentam 20.471 falsos, sem positivos ou nulos. A origem computacional está documentada; eventual confirmação posicional de estabelecimentos exige trabalho específico, separado e versionado. Registro detalhado no repositório privado: `docs/origem-coordenada-eh-estabelecimento-r87-20261018.md`.
