@@ -7,6 +7,7 @@ import os
 import re
 import sys
 import urllib.request
+import urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -77,6 +78,17 @@ def main():
     if not API_KEY:
         print("ROUTER_PROXY_NOT_RUN: backend credential absent; no behavioral results.")
         return 2
+    if BACKEND == "litellm" and API_BASE:
+        req = urllib.request.Request(API_BASE.rstrip("/") + "/v1/models", headers={"Authorization": "Bearer " + API_KEY})
+        try:
+            with urllib.request.urlopen(req, timeout=8) as res:
+                print("ROUTER_GATEWAY_AUTH_HTTP", res.status)
+        except urllib.error.HTTPError as err:
+            print("ROUTER_GATEWAY_AUTH_HTTP", err.code)
+            return 2
+        except urllib.error.URLError:
+            print("ROUTER_GATEWAY_TRANSPORT_ERROR")
+            return 2
     catalog = descriptions()
     cases = read_csv(CASES / "conflitos.csv") + read_csv(CASES / "conflitos_negative.csv")
     if len(cases) != 25 or set(c["expected_skill"] for c in cases) != set(catalog):
