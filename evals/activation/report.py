@@ -35,6 +35,32 @@ def evaluate(rows):
         "release_gate_passed": total > 0 and counts["PASS"] == total,
     }
 
+
+def check_release_evidence(rows, expected):
+    """Verify exact coverage and proof metadata, without asserting proof authenticity."""
+    by_id = {row["case_id"].strip(): row for row in rows}
+    if len(by_id) != len(rows) or set(by_id) != set(expected):
+        raise ValueError("Recorded cases differ from expected 25-case inventory")
+    problems = []
+    for case, row in by_id.items():
+        if row["status"] != "PASS":
+            continue
+        if row.get("actual_skill", "").strip() != expected[case]:
+            problems.append(case + ": skill mismatch")
+        if not all(row.get(field, "").strip() for field in ("evidence", "model", "library_commit")):
+            problems.append(case + ": missing proof metadata")
+    return problems
+
+def expected_cases():
+    out = {}
+    for filename in ("conflitos.csv", "conflitos_negative.csv"):
+        with (ROOT / filename).open(encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                if row["id"] in out:
+                    raise ValueError("Duplicate case in fixtures")
+                out[row["id"]] = row["expected_skill"]
+    return out
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--results", type=Path, default=ROOT / "execution-results.csv")
@@ -42,7 +68,11 @@ def main():
                         help="Generate an informative report without failing on pending cases")
     args = parser.parse_args()
     with args.results.open(encoding="utf-8", newline="") as f:
-        result = evaluate(list(csv.DictReader(f)))
+        rows = list(csv.DictReader(f))
+    result = evaluate(rows)
+    problems = check_release_evidence(rows, expected_cases())
+    result["proof_metadata_issues"] = problems
+    result["release_gate_passed"] = result["release_gate_passed"] and not problems
     print(json.dumps(result, ensure_ascii=False, indent=2))
     if not args.allow_incomplete and not result["release_gate_passed"]:
         raise SystemExit(1)
