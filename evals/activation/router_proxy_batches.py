@@ -47,7 +47,7 @@ def probe(case, catalog):
         from litellm import completion
         routed_model = ("openai/" + MODEL) if API_BASE else MODEL
         options = {"api_base": API_BASE.rstrip("/") + "/v1"} if API_BASE else {}
-        response = completion(model=routed_model, messages=[{"role":"user","content":prompt}],
+        response = completion(model=routed_model, messages=[{"role":"system","content":"You are a strict Skill selector. Output exactly one valid skill name, with no reasoning, enumeration, punctuation or other text."},{"role":"user","content":prompt}],
                               api_key=API_KEY, max_tokens=192, temperature=0, **options)
         chosen = (response.choices[0].message.content or "").strip()
     elif BACKEND == "responses":
