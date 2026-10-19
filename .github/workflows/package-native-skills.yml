@@ -1,6 +1,9 @@
 name: Package 13 Skills for native testing
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/package-native-skills.yml'
 permissions:
   contents: read
 jobs:
