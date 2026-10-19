@@ -59,7 +59,7 @@ def probe(case, catalog):
 def main():
     if not API_KEY:
         print("ROUTER_PROXY_NOT_RUN: OPENAI_API_KEY absent; no behavioral results.")
-        return 0
+        return 2
     catalog = descriptions()
     cases = read_csv(CASES / "conflitos.csv") + read_csv(CASES / "conflitos_negative.csv")
     if len(cases) != 25 or set(c["expected_skill"] for c in cases) != set(catalog):
