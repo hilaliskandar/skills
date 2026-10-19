@@ -13,4 +13,16 @@ class TestParquetFlag(unittest.TestCase):
   self.assertEqual(r["estabelecimentos"]["desconhecido"],1)
  def test_mismatch(self):
   with self.assertRaises(ValueError):m.summarize([True],[True,False],[1])
+class TestBondIntegrity(unittest.TestCase):
+ def test_null_is_rejected(self):
+  with self.assertRaises(ValueError):m.summarize([True],[False],[None])
+ def test_fraction_is_rejected(self):
+  with self.assertRaises(ValueError):m.summarize([True],[False],[2.5])
+ def test_negative_is_rejected(self):
+  with self.assertRaises(ValueError):m.summarize([True],[False],[-2])
+ def test_bool_is_rejected(self):
+  with self.assertRaises(ValueError):m.summarize([True],[False],[True])
+ def test_valid_integer_conserved(self):
+  r=m.summarize([True,False],[False,None],[3,5])
+  self.assertEqual(sum(r["vinculos"].values()),8)
 if __name__=="__main__":unittest.main()
