@@ -55,9 +55,13 @@ def probe(case, catalog):
     else:
         raise ValueError("Unknown backend")
     forbidden = case.get("forbidden_skill", "")
-    return {"id": case["id"], "expected": case["expected_skill"], "selected": chosen,
+    exact = chosen in catalog
+    mentions = [name for name in catalog if re.search(r"(?<![\\w-])" + re.escape(name) + r"(?![\\w-])", chosen)]
+    normalized = chosen if exact else (mentions[0] if len(mentions) == 1 else "")
+    return {"id": case["id"], "expected": case["expected_skill"], "selected": normalized,
+            "format_exact": exact, "candidate_count": len(mentions),
             "forbidden": forbidden,
-            "outcome": "PASS" if chosen == case["expected_skill"] and chosen != forbidden else "FAIL"}
+            "outcome": "PASS" if normalized == case["expected_skill"] and normalized != forbidden else "FAIL"}
 
 
 def query_responses(prompt):
@@ -114,7 +118,8 @@ def main():
     summary = {"method":"external_model_choice_proxy_not_native_skill_activation",
                "backend":BACKEND,"model":MODEL,"cases":len(results),"passed":sum(r["outcome"]=="PASS" for r in results),
                "failed":sum(r["outcome"]=="FAIL" for r in results),
-               "errors":sum(r["outcome"]=="ERROR" for r in results)}
+               "errors":sum(r["outcome"]=="ERROR" for r in results),
+               "format_violations":sum(r.get("format_exact") is False for r in results)}
     print("ROUTER_PROXY_SUMMARY " + json.dumps(summary, ensure_ascii=False))
     print("ROUTER_PROXY_CASES " + json.dumps(results, ensure_ascii=False))
     # Never populate execution-results.csv: this evaluates text selection, not ChatGPT's runtime.
