@@ -1,0 +1,48 @@
+name: Package 13 Skills for native testing
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create independent Skill ZIP archives
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root=Path.cwd()
+          skills=sorted(root.glob('*/*/SKILL.md'))
+          if len(skills)!=13:
+              raise SystemExit(f'Expected 13 skills; found {len(skills)}')
+          out=root/'dist'/'native-skill-zips'
+          out.mkdir(parents=True,exist_ok=True)
+          for entry in skills:
+              skill=entry.parent
+              if not (skill/'agents'/'openai.yaml').exists():
+                  raise SystemExit(f'Missing agents/openai.yaml for {skill.name}')
+              target=out/f'{skill.name}.zip'
+              with ZipFile(target,'w',compression=ZIP_DEFLATED) as archive:
+                  for src in sorted(skill.rglob('*')):
+                      if src.is_file() and '__pycache__' not in src.parts:
+                          archive.write(src,arcname=(Path(skill.name)/src.relative_to(skill)).as_posix())
+              with ZipFile(target) as archive:
+                  paths=archive.namelist()
+                  if f'{skill.name}/SKILL.md' not in paths or f'{skill.name}/agents/openai.yaml' not in paths:
+                      raise SystemExit(f'Invalid archive: {target.name}')
+              print('SKILL_ARCHIVE',target.name)
+          print('SKILL_ARCHIVES_TOTAL',len(skills))
+          PY
+      - name: Upload installable archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-skill-installation-zips
+          path: dist/native-skill-zips/*.zip
+          if-no-files-found: error
+          retention-days: 14
