@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       provider_model:
-        description: LiteLLM model route, e.g. groq/llama-3.3-70b-versatile
+        description: OpenRouter model route through LiteLLM
         required: true
-        default: groq/llama-3.3-70b-versatile
+        default: openrouter/nvidia/nemotron-3-ultra-550b-a55b:free
         type: string
   push:
     paths:
@@ -19,8 +19,8 @@ jobs:
     timeout-minutes: 10
     env:
       ROUTER_TEST_BACKEND: litellm
-      ROUTER_TEST_MODEL: ${{ inputs.provider_model || 'groq/llama-3.3-70b-versatile' }}
-      ROUTER_TEST_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      ROUTER_TEST_MODEL: ${{ inputs.provider_model || 'openrouter/nvidia/nemotron-3-ultra-550b-a55b:free' }}
+      ROUTER_TEST_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       ROUTER_TEST_BATCH_SIZE: '13'
     steps:
       - uses: actions/checkout@v4
