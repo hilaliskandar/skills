@@ -14,6 +14,7 @@ CASES = ROOT / "evals" / "activation"
 MODEL = os.environ.get("ROUTER_TEST_MODEL", "gpt-4.1-mini")
 API_KEY = os.environ.get("ROUTER_TEST_API_KEY", "") or os.environ.get("OPENAI_API_KEY", "")
 BACKEND = os.environ.get("ROUTER_TEST_BACKEND", "responses")
+API_BASE = os.environ.get("ROUTER_TEST_API_BASE", "")
 BATCH_SIZE = max(1, min(int(os.environ.get("ROUTER_TEST_BATCH_SIZE", "13")), 25))
 
 
@@ -42,8 +43,10 @@ def probe(case, catalog):
               + "\n\nUser request:\n" + case["prompt"])
     if BACKEND == "litellm":
         from litellm import completion
-        response = completion(model=MODEL, messages=[{"role":"user","content":prompt}],
-                              api_key=API_KEY, max_tokens=80, temperature=0)
+        routed_model = ("openai/" + MODEL) if API_BASE else MODEL
+        options = {"api_base": API_BASE.rstrip("/") + "/v1"} if API_BASE else {}
+        response = completion(model=routed_model, messages=[{"role":"user","content":prompt}],
+                              api_key=API_KEY, max_tokens=80, temperature=0, **options)
         chosen = (response.choices[0].message.content or "").strip()
     elif BACKEND == "responses":
         chosen = query_responses(prompt)
