@@ -1,0 +1,24 @@
+name: Skill routing proxy batched 25
+on:
+  push:
+    paths:
+      - 'evals/activation/router_proxy_batches.py'
+      - '.github/workflows/activation-proxy-batch.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proxy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ROUTER_TEST_MODEL: gpt-4.1-mini
+      ROUTER_TEST_BATCH_SIZE: '13'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run up to 13 independent classification calls per batch
+        run: python evals/activation/router_proxy_batches.py
