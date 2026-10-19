@@ -23,10 +23,15 @@ def summarize(geometry_flags,predial_flags,bonds):
         if g not in {"verdadeiro","falso"}:raise ValueError("Marcador de geometria inválido")
         status=classify(flag) if g=="verdadeiro" else "sem_geometria"
         c[status]+=1
-        if bond is not None:
+        if bond is None or isinstance(bond,bool):
+            raise ValueError("Vínculos ausentes ou inválidos")
+        try:
             n=float(bond)
-            if not math.isfinite(n) or n<0:raise ValueError("Vínculos inválidos")
-            v[status]+=n
+        except (ValueError,TypeError,OverflowError):
+            raise ValueError("Vínculos inválidos") from None
+        if not math.isfinite(n) or n<0 or not n.is_integer():
+            raise ValueError("Vínculos devem ser inteiros não negativos")
+        v[status]+=int(n)
     return {"estabelecimentos":dict(c),"vinculos":dict(v),"total":len(geometry_flags)}
 
 def main():
