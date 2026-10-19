@@ -12,13 +12,21 @@ def compute(rows, config):
     policy = config.get("missing", "exclude_and_report")
     if policy != "exclude_and_report": raise ValueError("Política de ausentes não suportada")
     valid, excluded = [], []
+    id_column = config["id_column"]
+    seen_ids = set()
     for row in rows:
+        identifier = str(row.get(id_column, "")).strip()
+        if not identifier:
+            raise ValueError("Identificador municipal ausente")
+        if identifier in seen_ids:
+            raise ValueError("Identificador municipal duplicado: " + identifier)
+        seen_ids.add(identifier)
         try:
             values = {name: float(row[name]) for name in indicators}
             if not all(math.isfinite(v) for v in values.values()): raise ValueError()
             valid.append((row, values))
         except (ValueError, TypeError, KeyError):
-            excluded.append(row.get(config["id_column"], ""))
+            excluded.append(identifier)
     if not valid: raise ValueError("Nenhuma linha válida")
     ranges = {name: (min(v[name] for _,v in valid), max(v[name] for _,v in valid)) for name in indicators}
     scores=[]
@@ -33,7 +41,7 @@ def compute(rows, config):
                 raise ValueError("Direção inválida: "+direction)
             detail[name]=value
         score=sum(detail[name]*float(spec["weight"]) for name,spec in indicators.items())/sum(weights)
-        scores.append({"id":row[config["id_column"]],"score":round(score,12),"normalized":detail})
+        scores.append({"id":str(row[id_column]).strip(),"score":round(score,12),"normalized":detail})
     scores.sort(key=lambda x:(-x["score"],x["id"]))
     return {"results":scores,"excluded_ids":excluded,"indicator_ranges":ranges,"constant_indicators":[k for k,(a,b) in ranges.items() if a==b]}
 def main():
