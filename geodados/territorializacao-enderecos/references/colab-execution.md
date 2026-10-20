@@ -1,0 +1,7 @@
+# Execução assistida em Google Colab
+
+Quando o ambiente do ChatGPT ou Codex não conseguir abrir arquivos Parquet/GeoParquet, usar notebook Colab autorizado como executor **assistido**. O operador conecta seu próprio Google Drive, informa o caminho do arquivo canônico e uma pasta de saída separada. Instalar `pyarrow` e `pandas` na sessão Colab. Ler por seleção de colunas, preservar original, contar geometrias, pontos efetivos, referências não prediais e marcadores indeterminados; calcular vínculos por classe. Gerar JSON e CSV **agregados**, com número de linhas, conservação, nomes dos campos, checksum SHA-256 e limitações. Não colocar dados de estabelecimentos nem identificadores individuais no repositório público.
+
+A simples presença de notebook no Drive não autoriza nem permite sua execução automática pelo ChatGPT. O usuário deve iniciar a sessão Colab e autorizar o acesso aos arquivos; somente resultados agregados podem ser retomados pela skill via conector autorizado. Conferir a definição de cada indicador e não substituir zero por contagem de geometria.
+
+O notebook distribuído ao usuário deve exigir a configuração explícita do caminho de entrada; a skill não deve pressupor pastas ou IDs de Drive de produção.

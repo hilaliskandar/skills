@@ -1,3 +1,4 @@
 interface:
   display_name: "Análise de Dispositivos"
-  short_description: "Examinar dispositivos de normas urbanísticas, vigência, remissões, compatibilidades, instrumentos, í"
+  short_description: "Analisar artigos específicos de normas urbanísticas"
+  default_prompt: "Use $analise-dispositivos para realizar esta tarefa conforme o procedimento da skill."

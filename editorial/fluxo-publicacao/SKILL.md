@@ -1,6 +1,6 @@
 ---
 name: fluxo-publicacao
-description: Preparar e verificar artigos, chamadas e envios por Emdash, e-mail e LinkedIn com rastreabilidade e controle de execução.
+description: Preparar ou executar fluxo editorial de textos, chamadas, agendamentos e publicação em canais digitais. Usar quando o pedido principal é criar, revisar, agendar ou publicar conteúdo. Para auditar retrospectivamente se uma edição de radar realmente foi publicada no Emdash, enviada ou divulgada no LinkedIn, usar auditoria-radares.
 ---
 
 # Fluxo de Publicação

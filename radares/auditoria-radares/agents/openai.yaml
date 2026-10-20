@@ -1,3 +1,4 @@
 interface:
   display_name: "Auditoria dos Radares"
-  short_description: "Auditar edições dos radares normativo, imobiliário e de contratações, verificando fontes, deduplicaç"
+  short_description: "Verificar fontes, edições e publicações dos radares"
+  default_prompt: "Use $auditoria-radares para realizar esta tarefa conforme o procedimento da skill."

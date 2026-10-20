@@ -1,3 +1,4 @@
 interface:
   display_name: "Revisão Autoral"
-  short_description: "Revisar a robustez argumentativa, coerência, precisão conceitual e qualidade autoral de en"
+  short_description: "Revisar argumentação preservando a voz do autor"
+  default_prompt: "Use $revisao-autoral para realizar esta tarefa conforme o procedimento da skill."

@@ -1,6 +1,6 @@
 ---
 name: inventario-normativo
-description: Inventariar e auditar planos diretores, leis de uso e ocupação do solo e códigos de obras. Usar em painéis normativos, levantamentos municipais e análise da hierarquia territorial.
+description: Inventariar legislação urbanística municipal, identificando plano diretor, LUOS, códigos, alterações, anexos e vigência com fontes oficiais. Usar para levantamento do corpus legal e hierarquia territorial.
 ---
 
 # Inventário Normativo
@@ -22,3 +22,7 @@ description: Inventariar e auditar planos diretores, leis de uso e ocupação do
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Recursos condicionais
+- Para estruturar registros legislativos, consultar `references/inventory-schema.md`.
+- Para trabalho prolongado ou retomada entre conversas, consultar `references/run-manifest.md` e gravar o estado da tarefa fora da skill.

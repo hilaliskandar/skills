@@ -1,6 +1,6 @@
 ---
 name: diagnostico-integrado
-description: Elaborar diagnósticos municipais reproduzíveis com fontes oficiais IBGE, Censo, FINBRA, CadÚnico, serviços, economia, infraestrutura e legislação.
+description: Elaborar diagnóstico municipal multitemático com bases oficiais, indicadores rastreáveis e compatibilidade temporal e territorial. Usar para perfis municipais, análise socioeconômica e diagnósticos de planejamento; não para construir rankings ponderados.
 ---
 
 # Diagnóstico Municipal Integrado

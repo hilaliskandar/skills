@@ -1,3 +1,4 @@
 interface:
   display_name: "Territorialização de Endereços"
-  short_description: "Atribuir estabelecimentos RAIS/CNEFE a endereço, face, quadra, conjunto de quadras ou seto"
+  short_description: "Localizar estabelecimentos com precisão graduada"
+  default_prompt: "Use $territorializacao-enderecos para realizar esta tarefa conforme o procedimento da skill."

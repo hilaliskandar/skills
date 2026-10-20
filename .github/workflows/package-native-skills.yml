@@ -1,0 +1,83 @@
+name: Package 13 Skills for native testing
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/package-native-skills.yml'
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Create independent Skill ZIP archives
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root=Path.cwd()
+          skills=sorted(root.glob('*/*/SKILL.md'))
+          if len(skills)!=13:
+              raise SystemExit(f'Expected 13 skills; found {len(skills)}')
+          out=root/'dist'/'native-skill-zips'
+          out.mkdir(parents=True,exist_ok=True)
+          manifest={'commit': os.environ.get('GITHUB_SHA'), 'archives': []}
+          for entry in skills:
+              skill=entry.parent
+              if not (skill/'agents'/'openai.yaml').exists():
+                  raise SystemExit(f'Missing agents/openai.yaml for {skill.name}')
+              target=out/f'{skill.name}.zip'
+              with ZipFile(target,'w',compression=ZIP_DEFLATED) as archive:
+                  for src in sorted(skill.rglob('*')):
+                      if src.is_file() and '__pycache__' not in src.parts:
+                          archive.write(src,arcname=(Path(skill.name)/src.relative_to(skill)).as_posix())
+              with ZipFile(target) as archive:
+                  paths=archive.namelist()
+                  if f'{skill.name}/SKILL.md' not in paths or f'{skill.name}/agents/openai.yaml' not in paths:
+                      raise SystemExit(f'Invalid archive: {target.name}')
+              digest=hashlib.sha256(target.read_bytes()).hexdigest()
+              if ZipFile(target).testzip() is not None:
+                  raise SystemExit(f'ZIP integrity failed: {target.name}')
+              manifest['archives'].append({'skill':skill.name,'file':target.name,'sha256':digest})
+              print('SKILL_ARCHIVE',target.name, digest)
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+chr(10),encoding='utf-8')
+          print('SKILL_ARCHIVES_TOTAL',len(skills))
+          PY
+      - name: Independently verify archive manifest
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          from zipfile import ZipFile
+          folder=Path('dist/native-skill-zips')
+          manifest=json.loads((folder/'manifest.json').read_text(encoding='utf-8'))
+          archives=manifest.get('archives', [])
+          actual={p.name for p in folder.glob('*.zip')}
+          documented={item['file'] for item in archives}
+          if manifest.get('commit') != os.environ['GITHUB_SHA']:
+              raise SystemExit('Manifest commit mismatch')
+          if len(archives)!=13 or len(documented)!=13 or actual!=documented:
+              raise SystemExit('Manifest archives differ from the 13 published ZIPs')
+          for item in archives:
+              archive=folder/item['file']
+              if hashlib.sha256(archive.read_bytes()).hexdigest()!=item['sha256']:
+                  raise SystemExit('SHA256 mismatch for '+archive.name)
+              with ZipFile(archive) as z:
+                  if z.testzip() is not None or item['skill']+'/SKILL.md' not in z.namelist():
+                      raise SystemExit('ZIP validation failed for '+archive.name)
+          print('MANIFEST_VERIFIED', len(archives), manifest['commit'])
+          PY
+      - name: Upload installable archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-skill-installation-zips
+          path: dist/native-skill-zips/
+          if-no-files-found: error
+          retention-days: 14

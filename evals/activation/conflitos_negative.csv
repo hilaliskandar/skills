@@ -1,0 +1,13 @@
+id,expected_skill,forbidden_skill,prompt,reason
+dia-n01,diagnostico-integrado,indicadores-priorizacao,"Apresente perfis de saúde, educação e infraestrutura de Município X sem criar ranking","Perfil multitemático não é índice composto"
+dia-n02,indicadores-priorizacao,diagnostico-integrado,"Calcule notas normalizadas e ordene municípios com pesos e análise de sensibilidade","Ranking ponderado não é diagnóstico descritivo"
+urb-n01,inventario-normativo,analise-dispositivos,"Localize todas as leis urbanísticas e alterações vigentes do município, sem analisar artigo isolado","Inventário do corpus não é interpretação pontual"
+urb-n02,analise-dispositivos,inventario-normativo,"Compare a redação e vigência do artigo 12 nas leis de 2018 e 2024","Dispositivo identificado não pede novo inventário"
+pes-n01,revisao-autoral,fichamento-fafat,"Reescreva dois parágrafos do ensaio e preserve o estilo do autor","Edição textual não é fichamento acadêmico"
+pes-n02,fichamento-fafat,revisao-autoral,"Fiche hipóteses, métodos, resultados e limites inferenciais do artigo científico","Análise da fonte não é reescrita autoral"
+rad-n01,auditoria-radares,fluxo-publicacao,"Verifique provas de envio e publicação de uma edição já encerrada","Auditoria não produz nova chamada"
+rad-n02,fluxo-publicacao,auditoria-radares,"Redija a chamada e prepare o agendamento de uma edição aprovada","Preparação não confirma publicação"
+geo-n01,auditoria-geoespacial,territorializacao-enderecos,"Audite CRS e unicidade de feições de um GeoJSON existente","Integridade espacial não é correspondência de endereços"
+geo-n02,territorializacao-enderecos,auditoria-geoespacial,"Associe estabelecimentos por CEP e quadra, com classes de confiança","Correspondência territorial não é auditoria de arquivo"
+gov-n01,contratacoes-publicas,atos-e-despachos,"Avalie riscos e critérios de medição de um termo de referência","Análise de contratação não é despacho"
+gov-n02,atos-e-despachos,contratacoes-publicas,"Redija despacho de recebimento de relatório técnico, sem revisar licitação","Ato administrativo não é exame de contratação"

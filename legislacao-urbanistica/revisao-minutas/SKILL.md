@@ -1,6 +1,6 @@
 ---
 name: revisao-minutas
-description: Revisar projetos de lei e decretos urbanísticos, classificando correções editoriais, ajustes diretamente aplicáveis e questões dependentes de decisão.
+description: Revisar projeto de lei ou decreto urbanístico e classificar propostas de mudança editorial, técnica, jurídica ou dependente de decisão. Usar para confronto minuta-parecer, revisão redacional e matriz de pendências.
 ---
 
 # Revisão de Minutas

@@ -1,3 +1,4 @@
 interface:
   display_name: "Revisão de Minutas"
-  short_description: "Revisar projetos de lei e decretos urbanísticos, classificando correções editoriais, ajustes diretam"
+  short_description: "Revisar e classificar alterações de minutas legais"
+  default_prompt: "Use $revisao-minutas para realizar esta tarefa conforme o procedimento da skill."

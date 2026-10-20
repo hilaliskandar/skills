@@ -1,3 +1,4 @@
 interface:
   display_name: "Fichamento FAFAT+"
-  short_description: "Realizar fichamento acadêmico crítico de artigos, capítulos, relatórios e preprints com análise de h"
+  short_description: "Fichar e avaliar criticamente trabalhos científicos"
+  default_prompt: "Use $fichamento-fafat para realizar esta tarefa conforme o procedimento da skill."

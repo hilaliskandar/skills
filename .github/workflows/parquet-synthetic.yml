@@ -1,0 +1,32 @@
+name: Parquet synthetic execution
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/parquet-synthetic.yml"
+      - "evals/workflow/test_parquet_runtime.py"
+      - "geodados/territorializacao-enderecos/scripts/inspect_parquet_flag.py"
+  pull_request:
+    paths:
+      - ".github/workflows/parquet-synthetic.yml"
+      - "evals/workflow/test_parquet_runtime.py"
+      - "geodados/territorializacao-enderecos/scripts/inspect_parquet_flag.py"
+permissions:
+  contents: read
+jobs:
+  synthetic-parquet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Parquet reader
+        run: python -m pip install "pyarrow>=16,<25" "google-auth>=2,<3" "requests>=2,<3"
+      - name: Verify Drive executor syntax without credentials
+        run: python -m py_compile scripts/drive_qa_runner.py
+      - name: Execute synthetic Parquet roundtrip
+        run: |
+          python -m unittest discover -s evals/workflow -p 'test_parquet_runtime.py' -v
+          python -m unittest discover -s evals/workflow -p 'test_drive_qa_runner.py' -v

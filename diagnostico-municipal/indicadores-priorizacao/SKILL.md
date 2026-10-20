@@ -1,6 +1,6 @@
 ---
 name: indicadores-priorizacao
-description: Construir índices auditáveis de prioridade municipal com normalização, pesos, direção dos indicadores, dados oficiais e análise de sensibilidade.
+description: Construir e auditar índice composto ou ranking de prioridade municipal, documentando normalização, pesos, ausentes e sensibilidade. Usar quando a tarefa pede fórmula, cálculo comparativo ou classificação de municípios.
 ---
 
 # Indicadores de Priorização
@@ -22,3 +22,8 @@ description: Construir índices auditáveis de prioridade municipal com normaliz
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Cálculo determinístico
+- Antes do cálculo, consultar `references/index-method.md` e justificar escolha das variáveis e pesos.
+- Para CSVs compatíveis e configuração JSON explícita, executar `scripts/compute_index.py entrada.csv config.json saida.json`.
+- Conferir `excluded_ids`, indicadores constantes e sensibilidade; não presumir causalidade.

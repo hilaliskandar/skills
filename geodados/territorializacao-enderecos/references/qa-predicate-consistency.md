@@ -1,0 +1,3 @@
+# Validação semântica de indicadores de posição
+
+A contagem de geometrias disponíveis não pode ser usada como valor esperado para a contagem de pontos do estabelecimento sem uma justificativa independente. A classificação deve distinguir explicitamente valores verdadeiros, falsos e desconhecidos. Na conversão de campos textuais, evitar coerção booleana genérica; exigir domínio explícito, registrar valores não reconhecidos e preservar a rastreabilidade dos registros. Antes de aprovar um controle de qualidade, comparar definição do indicador, filtros, universo e valor esperado. Não modificar dados originais para eliminar alertas.

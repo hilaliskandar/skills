@@ -1,6 +1,6 @@
 ---
 name: analise-dispositivos
-description: Examinar dispositivos de normas urbanísticas, vigência, remissões, compatibilidades, instrumentos, índices e parâmetros para pareceres e revisões normativas.
+description: Interpretar e comparar artigos específicos de leis urbanísticas, verificando texto, alterações, vigência e incidência territorial. Usar para análise de dispositivos já identificados; não para inventário amplo de legislação.
 ---
 
 # Análise de Dispositivos
@@ -22,3 +22,7 @@ description: Examinar dispositivos de normas urbanísticas, vigência, remissõe
 
 ## Entrega
 Produzir resultado rastreável, quadro de evidências quando pertinente, lacunas e próximos encaminhamentos.
+
+## Referências condicionais
+- Para comprovação e classificação de dispositivos legais, consultar `references/normative-evidence-schema.md`.
+- Para comparações entre normas, utilizar `references/comparison-schema.md`.

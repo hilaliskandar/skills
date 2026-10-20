@@ -1,3 +1,4 @@
 interface:
   display_name: "Atos e Despachos"
-  short_description: "Produzir ou revisar despachos, notas técnicas, minutas de decreto e manifestações administrativas co"
+  short_description: "Redigir atos e despachos com fundamentação oficial"
+  default_prompt: "Use $atos-e-despachos para realizar esta tarefa conforme o procedimento da skill."

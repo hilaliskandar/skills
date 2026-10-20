@@ -1,6 +1,6 @@
 ---
 name: revisao-autoral
-description: Revisar a robustez argumentativa, coerência, precisão conceitual e qualidade autoral de ensaios e artigos, preservando a voz do autor.
+description: Revisar estilo, coerência, originalidade argumentativa e robustez de ensaios e artigos, preservando a voz autoral. Usar para intervenções editoriais localizadas e reescrita justificada; não para fichamento de obra científica.
 ---
 
 # Revisão Autoral

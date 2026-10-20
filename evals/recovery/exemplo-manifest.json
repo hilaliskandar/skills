@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "task_id": "exemplo-sintetico-inventario",
+  "skill": "inventario-normativo",
+  "skill_revision": "not-set",
+  "cutoff": "2026-10-17",
+  "inputs": [],
+  "completed_steps": [
+    "escopo-definido"
+  ],
+  "artifacts": [],
+  "open_questions": [
+    "verificar-fontes-oficiais"
+  ],
+  "next_step": "consultar-fonte-primaria",
+  "external_actions": []
+}

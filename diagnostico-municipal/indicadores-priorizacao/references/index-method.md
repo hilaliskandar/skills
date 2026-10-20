@@ -1,0 +1,3 @@
+# Método de índice de priorização
+
+Entrada: CSV com identificador municipal e colunas numéricas; JSON de configuração com indicadores, direção, peso e política de ausentes. Normalização min-max por indicador: (x-min)/(max-min), invertida se 'lower_is_priority'. Se max=min, usar 0 para todos, registrar indicador constante e não alegar poder discriminatório. Exigir pesos não negativos e soma positiva, renormalizando para soma 1. A exclusão por valores ausentes deve constar do relatório; não imputar silenciosamente. O resultado não confere causalidade, nem substitui juízo técnico sobre escolha das variáveis.
