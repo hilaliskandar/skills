@@ -19,6 +19,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import hashlib, json, os
           from zipfile import ZipFile, ZIP_DEFLATED
           root=Path.cwd()
           skills=sorted(root.glob('*/*/SKILL.md'))
@@ -26,6 +27,7 @@ jobs:
               raise SystemExit(f'Expected 13 skills; found {len(skills)}')
           out=root/'dist'/'native-skill-zips'
           out.mkdir(parents=True,exist_ok=True)
+          manifest={'commit': os.environ.get('GITHUB_SHA'), 'archives': []}
           for entry in skills:
               skill=entry.parent
               if not (skill/'agents'/'openai.yaml').exists():
@@ -39,13 +41,18 @@ jobs:
                   paths=archive.namelist()
                   if f'{skill.name}/SKILL.md' not in paths or f'{skill.name}/agents/openai.yaml' not in paths:
                       raise SystemExit(f'Invalid archive: {target.name}')
-              print('SKILL_ARCHIVE',target.name)
+              digest=hashlib.sha256(target.read_bytes()).hexdigest()
+              if ZipFile(target).testzip() is not None:
+                  raise SystemExit(f'ZIP integrity failed: {target.name}')
+              manifest['archives'].append({'skill':skill.name,'file':target.name,'sha256':digest})
+              print('SKILL_ARCHIVE',target.name, digest)
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\\n',encoding='utf-8')
           print('SKILL_ARCHIVES_TOTAL',len(skills))
           PY
       - name: Upload installable archives
         uses: actions/upload-artifact@v4
         with:
           name: native-skill-installation-zips
-          path: dist/native-skill-zips/*.zip
+          path: dist/native-skill-zips/
           if-no-files-found: error
           retention-days: 14
